@@ -1,11 +1,11 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import MovieCard from './MovieCard'
+import Loading from './Loading';
 
 import { LoadMovies, LoadSearchMovies } from '../actions/movies';
 import { LoadGenres } from '../actions/genres';
@@ -43,7 +43,7 @@ class MovieList extends React.Component {
         if(!isFetched)
 			return (
 				<div className="movie-list">
-					<div className="loading"></div>
+					<Loading />
 				</div>
 			);
 
@@ -77,18 +77,11 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 	}, dispatch
 );
 
-const mapStateToProps = (state) => {
-	return {
-		movies: state.movies.all,
-		searchText: state.movies.searchText,
-		isFetched: state.movies.isFetched,
-		filter: state.movies.filter
-	}
-}
-
-// MovieList.propTypes = {
-//     movies: PropTypes.arrayOf(PropTypes.object),
-//     isFetched: PropTypes.bool
-// }
+const mapStateToProps = (state) => ({
+	movies: state.movies.all,
+	searchText: state.movies.searchText,
+	isFetched: state.movies.isFetched,
+	filter: state.movies.filter
+})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MovieList));

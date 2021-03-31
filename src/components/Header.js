@@ -10,8 +10,8 @@ function Header() {
         <header>
             <div className='content'>
                 <Link to='/'>
-                    <img src={logo} alt='MovieDB' />
-                    <strong>MoviesDB</strong>
+                    <img src={logo} alt='Movies' />
+                    <strong>Movies</strong>
                 </Link>
                 <SearchBar />
             </div>

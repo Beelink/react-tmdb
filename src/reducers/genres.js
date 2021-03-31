@@ -1,19 +1,19 @@
-import * as Actions from '../actions/genres';
+import types from '../actions/types';
 
 const initialState = {
 	all: [],
 	isFetched: false
 };
 
-const movies = (state = initialState, action) => {
+const genres = (state = initialState, action) => {
 	switch (action.type) {
-		case Actions.LOAD_GENRES_REQUEST:
+		case types.genres.loadGenresRequest:
 			return {
 				...state,
 				all: [],
 				isFetched: false
 			};
-		case Actions.LOAD_GENRES_SUCCESS:
+		case types.genres.loadGenresSuccess:
 			return {
 				...state,
 				all: action.payload.genres,
@@ -24,4 +24,4 @@ const movies = (state = initialState, action) => {
 	}
 }
 
-export default movies;
+export default genres;

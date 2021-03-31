@@ -1,8 +1,5 @@
 import api from '../services/api';
-
-export const LOAD_GENRES_REQUEST = 'LOAD_GENRES_REQUEST';
-export const LOAD_GENRES_SUCCESS = 'LOAD_GENRES_SUCCESS';
-export const LOAD_GENRES_ERROR   = 'LOAD_GENRES_ERROR';
+import types from './types';
 
 export const LoadGenres = () => {
 	return (dispatch) => {
@@ -19,19 +16,19 @@ export const LoadGenres = () => {
 
 const onLoadGenres = {
 	request: () => ({
-		type: LOAD_GENRES_REQUEST
+		type: types.genres.loadGenresRequest
 	}),
 	fetch: () => {
 		return api.request.get('/genre/movie/list');
 	},
 	success: (payload) => {
 		return {
-			type: LOAD_GENRES_SUCCESS,
+			type: types.genres.loadGenresSuccess,
 			payload
 		}
 	},
 	error: (payload) => ({
-		type: LOAD_GENRES_ERROR,
+		type: types.genres.loadGenresError,
 		errors: payload
 	})
 };

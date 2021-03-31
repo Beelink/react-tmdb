@@ -1,16 +1,5 @@
 import api from '../services/api';
-
-export const LOAD_MOVIES_REQUEST = 'LOAD_MOVIES_REQUEST';
-export const LOAD_MOVIES_SUCCESS = 'LOAD_MOVIES_SUCCESS';
-export const LOAD_MOVIES_ERROR   = 'LOAD_MOVIES_ERROR';
-
-export const LOAD_SEARCH_MOVIES_REQUEST = 'LOAD_SEARCH_MOVIES_REQUEST';
-export const LOAD_SEARCH_MOVIES_SUCCESS = 'LOAD_SEARCH_MOVIES_SUCCESS';
-export const LOAD_SEARCH_MOVIES_ERROR   = 'LOAD_SEARCH_MOVIES_ERROR';
-
-export const CHANGE_MOVIES_FILTER = 'CHANGE_MOVIES_FILTER';
-
-export const CLEAR_SEARCH_TEXT = 'CLEAR_SEARCH_TEXT';
+import types from './types';
 
 export const LoadMovies = (pageNumber = 1, filter = 'popular') => {
 	return (dispatch) => {
@@ -27,19 +16,19 @@ export const LoadMovies = (pageNumber = 1, filter = 'popular') => {
 
 const onLoadMovies = {
 	request: () => ({
-		type: LOAD_MOVIES_REQUEST
+		type: types.movies.loadMoviesRequest
 	}),
 	fetch: (pageNumber, filter) => {
 		return api.request.get(`/movie/${filter}?page=${pageNumber}`);
 	},
 	success: (payload) => {
 		return {
-			type: LOAD_MOVIES_SUCCESS,
+			type: types.movies.loadMoviesSuccess,
 			payload
 		}
 	},
 	error: (payload) => ({
-		type: LOAD_MOVIES_ERROR,
+		type: types.movies.loadMoviesError,
 		errors: payload
 	})
 };
@@ -59,7 +48,7 @@ export const LoadSearchMovies = (query, page = 1) => {
 
 const onLoadSearchMovies = {
 	request: (query) => ({
-		type: LOAD_SEARCH_MOVIES_REQUEST,
+		type: types.movies.loadSearchMoviesRequest,
 		searchText: query
 	}),
 	fetch: (query, page) => {
@@ -67,12 +56,26 @@ const onLoadSearchMovies = {
 	},
 	success: (payload) => {
 		return {
-			type: LOAD_SEARCH_MOVIES_SUCCESS,
+			type: types.movies.loadSearchMoviesSuccess,
 			payload
 		}
 	},
 	error: (payload) => ({
-		type: LOAD_SEARCH_MOVIES_ERROR,
+		type: types.movies.loadSearchMoviesError,
 		errors: payload
 	})
+};
+
+export const ClearSearchText = () => {
+	return (dispatch) => {
+		dispatch(onClearSearchText.request());
+	}
+};
+
+const onClearSearchText = {
+	request: () => {
+		return ({
+			type: types.movies.clearSearchText
+		})
+	}
 };

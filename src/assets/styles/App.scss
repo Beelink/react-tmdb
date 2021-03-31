@@ -35,19 +35,33 @@ header {
     text-decoration: none;
     display: inline-block;
     vertical-align: middle;
+
+    &:hover {
+      img {
+        transform: translateX(15px) rotate(90deg);
+      }
+
+      strong {
+        transform: translateX(-14px);
+        color: $accent-color;
+      }
+    }
   }
 
   img {
     width: 48px;
     display: inline-block;
     vertical-align: middle;
+    transition: $fast-transition;
   }
 
   strong {
     color: #fff;
     vertical-align: middle;
     margin: 16px;
-    font-size: 24px;
+    font-size: 28px;
+    display: inline-block;
+    transition: $fast-transition;
   }
 }
 
@@ -67,6 +81,7 @@ h1 {
     padding: 16px;
     flex: 1;
     flex-basis: 185px;
+    // justify-content: space-between;
 
     &:hover .movie-image img {
       transform: scale(1.1);
@@ -80,7 +95,6 @@ h1 {
   .movie-rating {
     margin-bottom: -32px;
     position: absolute;
-    background: $neutral-color;
     box-shadow: $light-shadow;
     font-weight: bold;
     padding: 4px 8px;
@@ -88,6 +102,7 @@ h1 {
     left: 8px;
     top: 24px;
     z-index: 1;
+    background: $neutral-color;
 
     &.-positive {
       background: $positive-color;
@@ -137,6 +152,9 @@ h1 {
       justify-content: center;
       align-items: center;
       font-weight: bold;
+      padding: 16px;
+      box-sizing: border-box;
+      text-align: center;
     }
   }
 
@@ -186,5 +204,6 @@ h1 {
     padding: 8px 16px;
     margin: 0 0 0 8px;
     color: $light-color;
+    height: 32px;
   }
 }

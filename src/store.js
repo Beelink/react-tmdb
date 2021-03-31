@@ -9,14 +9,11 @@ const logger = createLogger({
     diff: true
 });
 
-const  configureStore = function (initialState) {
-    return createStore(
-        rootReducer, 
-        initialState, 
-        composeWithDevTools(
-            applyMiddleware(thunk, logger)  
-        )
-    );
-}
+const store = createStore(
+    rootReducer, 
+    composeWithDevTools(
+        applyMiddleware(thunk, logger)  
+    )
+);
 
-export default configureStore;
+export default store;

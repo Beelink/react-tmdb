@@ -1,4 +1,4 @@
-import * as Actions from '../actions/movies';
+import types from '../actions/types';
 
 const initialState = {
 	all: [],
@@ -9,37 +9,32 @@ const initialState = {
 
 const movies = (state = initialState, action) => {
 	switch (action.type) {
-		case Actions.LOAD_MOVIES_REQUEST:
+		case types.movies.loadMoviesRequest:
 			return {
 				...state,
 				all: [],
 				isFetched: false
 			};
-		case Actions.LOAD_MOVIES_SUCCESS:
+		case types.movies.loadMoviesSuccess:
 			return {
 				...state,
 				all: action.payload,
 				isFetched: true
 			};
-		case Actions.LOAD_SEARCH_MOVIES_REQUEST:
+		case types.movies.loadSearchMoviesRequest:
 			return {
 				...state,
 				all: [],
 				searchText: action.searchText,
 				isFetched: false
 			};
-		case Actions.LOAD_SEARCH_MOVIES_SUCCESS:
+		case types.movies.loadSearchMoviesSuccess:
 			return {
 				...state,
 				all: action.payload,
 				isFetched: true
 			};
-		case Actions.CHANGE_MOVIES_FILTER:
-			return {
-				...state,
-				filter: action.payload
-			};
-		case Actions.CLEAR_SEARCH_TEXT:
+		case types.movies.clearSearchText:
 			return {
 				...state,
 				searchText: ''
