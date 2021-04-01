@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
         const { searchText } = this.props;
         return (
             <div className='search-bar'>
-                <input type='text' placeholder='Search movies, actors, theaters...' onInput={this.searchInputChange} value={searchText} />
+                <input type='text' placeholder='Search movies...' onInput={this.searchInputChange} value={searchText} />
             </div>
         )
     }

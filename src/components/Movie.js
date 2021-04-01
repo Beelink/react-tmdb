@@ -13,6 +13,9 @@ import { LoadGenres } from '../actions/genres';
 import Loading from './Loading';
 import Rating from './Rating';
 import ActorList from './ActorList'
+import Recommendations from './Recommendations';
+
+import YoutubeIcon from '../assets/imgs/youtube.svg'
 
 class Movie extends React.Component {
 	componentDidMount() {
@@ -47,7 +50,7 @@ class Movie extends React.Component {
 		if(!isFetched) {
 			return <Loading />;
 		}
-		console.log(movie)
+
 		return (
 			<div className='movie'>
 				<Helmet>
@@ -69,6 +72,16 @@ class Movie extends React.Component {
 									onLoad={this.imageLoaded}
 									alt={movie.poster_path}
 								/>
+							</div>
+							<div className='find-trailers'>
+								<a href={`https://www.youtube.com/results?search_query=${movie.title} - Trailer`}>
+									<LazyLoadImage 
+										src={YoutubeIcon}
+										onLoad={this.imageLoaded}
+										alt='Find trailers'
+									/> 
+									Find trailers
+								</a>
 							</div>
 						</div>
 						<div className='column -right'>
@@ -168,6 +181,9 @@ class Movie extends React.Component {
 						</div>
 					</div>
 				</div>
+				<div className='content'>
+					<Recommendations />
+				</div>
 			</div>
 		)
 	}
@@ -176,7 +192,6 @@ class Movie extends React.Component {
 const mapDispatchToProps = (dispatch) => bindActionCreators({
 		LoadMovie,
 		LoadGenres,
-		// LoadMovieCredits
 	}, dispatch
 );
 

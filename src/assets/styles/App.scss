@@ -504,3 +504,30 @@ h1 {
     }
   }
 }
+
+.recommendations-inner {
+  h1 {
+    font-size: 36px;
+  }
+}
+
+.find-trailers {
+  margin-top: 16px;
+  text-align: center;
+  padding: 16px;
+
+  a {
+    text-decoration: none;
+    color: $text-color;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  img {
+    width: 20px;
+    margin: 0 8px 2px 0;
+    vertical-align: middle;
+  }
+}

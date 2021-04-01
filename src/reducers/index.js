@@ -5,6 +5,7 @@ import movies from './movies';
 import genres from './genres';
 import movie from './movie';
 import actors from './actors';
+import recommendations from './recommendations';
 
 export default combineReducers({
 	routing: routerReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
 	genres,
 	movie,
 	actors,
+	recommendations,
 });
