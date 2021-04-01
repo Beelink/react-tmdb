@@ -20,6 +20,11 @@ const types = {
         loadMovieSuccess: 'LOAD_MOVIE_SUCCESS',
         loadMovieError: 'LOAD_MOVIE_ERROR',
     },
+    actors: {
+        loadActorsRequest: 'LOAD_ACTORS_REQUEST',
+        loadActorsSuccess: 'LOAD_ACTORS_SUCCESS',
+        loadActorsError: 'LOAD_ACTORS_ERROR',
+    },
 }
 
 export default types;

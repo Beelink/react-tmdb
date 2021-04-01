@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import SearchBar from './SearchBar';
 
@@ -10,7 +11,10 @@ function Header() {
         <header>
             <div className='content'>
                 <Link to='/'>
-                    <img src={logo} alt='Movies' />
+                    <LazyLoadImage 
+                        src={logo}
+                        alt='Movies'
+                    />
                     <strong>Movies</strong>
                 </Link>
                 <SearchBar />

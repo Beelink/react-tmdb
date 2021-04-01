@@ -4,7 +4,7 @@ import InfoMessage from './InfoMessage'
 
 function NotFound(props) {
     return (
-        <div className='not-found'>
+        <div className='content'>
             <h1>Oops...</h1>
             <InfoMessage message={`The page you are looking for can't be found. Status: ${props.status}`} />
         </div>

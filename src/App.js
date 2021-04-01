@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
 // import Loading from './components/Loading';
@@ -17,29 +17,27 @@ function App() {
 	return (
 		<ErrorBoundary>
 		{/* <React.Suspense fallback={<Loading />}> */}
-			<Router>
+			<BrowserRouter>
 				<div className='app'>
 					<Header />
-					<div className='content'>
-						<Switch>
-							<Route exact path='/:page?'>
-								<Home />
-							</Route>
-							<Route exact path='/search/:query/:page?'>
-								<Search />
-							</Route>
-							<Route exact path='/movie/:movie_id/:cast?'>
-								<Movie />
-							</Route>
-							<Route
-								path='*'
-								status={404}
-								render={(props) => <NotFound {...props} status={404} />}
-							/>
-						</Switch>
-					</div>
+					<Switch>
+						<Route exact path='/:page?'>
+							<Home />
+						</Route>
+						<Route exact path='/search/:query/:page?'>
+							<Search />
+						</Route>
+						<Route exact path='/movie/:movie_id/:cast?'>
+							<Movie />
+						</Route>
+						<Route
+							path='*'
+							status={404}
+							render={(props) => <NotFound {...props} status={404} />}
+						/>
+					</Switch>
 				</div>
-			</Router>
+			</BrowserRouter>
 		{/* </React.Suspense> */}
 		</ErrorBoundary>
 	)

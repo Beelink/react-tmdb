@@ -29,8 +29,10 @@ class Search extends React.Component {
 				<Helmet>
 					<title>Search: {searchText} | Movies</title>
 				</Helmet>
-                <h1>Search: {searchText}</h1>
-                <MovieList />
+				<div className='content'>
+					<h1>Search: {searchText}</h1>
+					<MovieList />
+				</div>
             </div>
         )
 	}

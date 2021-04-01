@@ -3,18 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import config from '../config';
 
 import { LoadMovie } from '../actions/movie';
-// import { LoadMovieCredits } from '../actions/credits';
 import { LoadGenres } from '../actions/genres';
 
 import Loading from './Loading';
 import Rating from './Rating';
-// import CreditList from '../components/CreditList';
-// import ImagesList from '../components/ImagesList';
-// import RecommendationsList from '../components/RecommendationsList';
+import ActorList from './ActorList'
 
 class Movie extends React.Component {
 	componentDidMount() {
@@ -49,64 +47,127 @@ class Movie extends React.Component {
 		if(!isFetched) {
 			return <Loading />;
 		}
-		
+		console.log(movie)
 		return (
 			<div className='movie'>
 				<Helmet>
 					<title>{movie.title} | Movies</title>
 				</Helmet>
 				<div className='movie-single'>
-					<div className='movie-single-inner'>
-                        <Rating rating={movie.vote_average} />
-						<div className='movie-image'>
-							<img src={`${config.API_IMAGE.medium}/${movie.poster_path}`} onLoad={this.imageLoaded} alt={movie.poster_path}/>
+					<div className='movie-banner'>
+						<LazyLoadImage 
+							src={`${config.API_IMAGE.small}/${movie.poster_path}`}
+							onLoad={this.imageLoaded}
+							alt={movie.poster_path}
+						/>
+					</div>
+					<div className='content row'>
+						<div className='column -left'>
+							<div className='movie-image'>
+								<LazyLoadImage 
+									src={`${config.API_IMAGE.medium}/${movie.poster_path}`}
+									onLoad={this.imageLoaded}
+									alt={movie.poster_path}
+								/>
+							</div>
 						</div>
-						<div className='movie-details'>
-							<div className='movie-title'>
-								<span>Title</span>
-								<h1>{movie.title}</h1>
+						<div className='column -right'>
+							<div className='hero'>
+								<Rating rating={movie.vote_average} showMax />
+								<div className='movie-title'>
+									<h1>{movie.title}</h1>
+								</div>
+								<ul className='movie-genres'>
+									{movie.genres && movie.genres.map(item => {
+										return (
+											<li key={item.id}>{item.name}</li>
+										)
+									})}
+								</ul>
+								<ul className='movie-details'>
+									{movie.release_date ? (
+										<li>
+											<div className='detail'>Release date</div>
+											<div className='value'>{movie.release_date}</div>
+										</li>
+									) : ''}
+									<li>
+										<div className='detail'>Duration</div>
+										<div className='value'>{this.convertMinsToHrsMins(movie.runtime)}</div>
+									</li>
+									{movie.budget ? (
+										<li>
+											<div className='detail'>Budget</div>
+											<div className='value'>$ {this.moneySpace(movie.budget)}</div>
+										</li>
+									) : ''}
+								</ul>
 							</div>
-							{movie.overview ? (
-								<div className='movie-description'>
-									<span>Overview</span>
-									{movie.overview}
-								</div>
-							) : ''}
-							{movie.release_date ? (
-								<div className='movie-item'>
-									<span>Release date</span>
-									{movie.release_date}
-								</div>
-							) : ''}
-							{movie.budget ? (
-								<div className='movie-item'>
-									<span>Budget</span>
-									$ {this.moneySpace(movie.budget)}
-								</div>
-							) : ''}
-							{movie.revenue ? (
-								<div className='movie-item'>
-									<span>Revenue</span>
-									$ {this.moneySpace(movie.revenue)}
-								</div>
-							) : ''}
-							<div className='movie-item'>
-								<span>Duration</span>
-								{this.convertMinsToHrsMins(movie.runtime)}
+							<h2>Overview</h2>
+							<div className='movie-overview'>
+								{movie.overview}
 							</div>
-							<ul className='movie-genres'>
-								{movie.genres && movie.genres.map(item => {
-									return (
-										<li key={item.id}>{item.name}</li>
-									)
-								})}
-							</ul>
-							{/* <CreditList/>
-							<ImagesList/> */}
+							<ActorList />
+							<h2>More details</h2>
+							<div className='more-details'>
+								{movie.original_title ? (
+									<div className='detail-item'>
+										<span className='title'>Original title: </span>
+										{movie.original_title}
+									</div>
+								) : ''}
+								{movie.revenue ? (
+									<div className='detail-item'>
+										<span className='title'>Revenue: </span>
+										$ {this.moneySpace(movie.revenue)}
+									</div>
+								) : ''}
+								{movie.production_companies ? (
+									<div className='detail-item'>
+										<span className='title'>Production companies: </span>
+										{movie.production_companies.map((company, index) => {
+											return (
+												<span key={index}>{company.name}{index + 1 !== movie.production_companies.length && ', '}</span>
+											)
+										})}
+									</div>
+								) : ''}
+								{movie.production_countries ? (
+									<div className='detail-item'>
+										<span className='title'>Production countries: </span>
+										{movie.production_countries.map((country, index) => {
+											return (
+												<span key={index}>{country.name}{index + 1 !== movie.production_countries.length && ', '}</span>
+											)
+										})}
+									</div>
+								) : ''}
+								{movie.homepage ? (
+									<div className='detail-item'>
+										<span className='title'>Homepage: </span>
+										<a href={movie.homepage}>{new URL(movie.homepage).hostname}</a>
+									</div>
+								) : ''}
+								{movie.spoken_languages ? (
+									<div className='detail-item'>
+										<span className='title'>Spoken languages: </span>
+										{movie.spoken_languages.map((lang, index) => {
+											return (
+												<span key={index}>{lang.english_name}{index + 1 !== movie.spoken_languages.length && ', '}</span>
+											)
+										})}
+									</div>
+								) : ''}
+								{(movie.imdb_id && movie.id) ? (
+									<div className='detail-item'>
+										<span className='title'>External links: </span>
+										<a href={`https://www.imdb.com/title/${movie.imdb_id}`}>IMDb</a>, <a href={`https://www.themoviedb.org/movie/${movie.id}`}>TMDB</a>
+									</div>
+								) : ''}
+							</div>
 						</div>
 					</div>
 				</div>
-				{/* <Recommendations /> */}
 			</div>
 		)
 	}

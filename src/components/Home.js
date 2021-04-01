@@ -9,8 +9,10 @@ function Home() {
             <Helmet>
                 <title>Home | Movies</title>
             </Helmet>
-            <h1>Popular</h1>
-            <MovieList />
+            <div className='content'>
+                <h1>Popular</h1>
+                <MovieList />	
+            </div>
         </div>
     )
 }

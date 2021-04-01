@@ -6,7 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { LoadGenres } from '../actions/genres';
 
-import emptySmall from '../assets/imgs/empty-small.png';
+import emptySmall from '../assets/imgs/empty-movie.png';
 
 import config from '../config';
 
