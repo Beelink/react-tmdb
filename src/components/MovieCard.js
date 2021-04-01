@@ -10,6 +10,8 @@ import emptySmall from '../assets/imgs/empty-small.png';
 
 import config from '../config';
 
+import Rating from './Rating';
+
 class MovieCard extends React.Component {
 	imageLoaded = (e) => {
 		e.target.classList.add('-loaded');
@@ -18,8 +20,8 @@ class MovieCard extends React.Component {
 		const { movie, genres, isFetched } = this.props;
 
 		return (
-			<div className="movie-card">
-				<div className={`movie-rating ${movie.vote_average >= 7 ? '-positive': '-neutral'}`}>{movie.vote_average > 0 ? movie.vote_average : 'No rating'}</div>
+			<div className='movie-card'>
+				<Rating rating={movie.vote_average} />
 				<Link to={`/movie/${movie.id}`} className={`movie-image ${movie.poster_path || '-empty'}`}>
 					{movie.poster_path ? (
 						<LazyLoadImage 
@@ -34,8 +36,8 @@ class MovieCard extends React.Component {
 						/>
 					}
 				</Link>
-				<Link to={`/movie/${movie.id}`} className="movie-title">{movie.title}</Link>
-				<ul className="movie-genres">
+				<Link to={`/movie/${movie.id}`} className='movie-title'>{movie.title}</Link>
+				<ul className='movie-genres'>
 					{isFetched && movie.genre_ids.map((id, index) => {
 						const item = genres.filter(genre => genre.id === id);
 						if (item.length > 0) 

@@ -3,26 +3,25 @@ import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { LoadSearchMovies, ClearSearchText } from '../actions/movies';
+import { LoadSearch, ClearSearch } from '../actions/movies';
 
 import MovieList from './MovieList';
 
 class Search extends React.Component {
 	componentDidMount() {
-		const { match, LoadSearchMovies } = this.props;
-		console.log(1, this.props)
-		LoadSearchMovies(match.params.query, match.params.page);
+		const { match, LoadSearch } = this.props;
+		LoadSearch(match.params.query, match.params.page);
 	}
 	componentWillReceiveProps(nextProps) {
-		const { match, LoadSearchMovies } = this.props;
+		const { match, LoadSearch } = this.props;
 		if(nextProps.match.params.query !== match.params.query || nextProps.match.params.page !== match.params.page) {
-			LoadSearchMovies(nextProps.match.params.query, nextProps.match.params.page);
+			LoadSearch(nextProps.match.params.query, nextProps.match.params.page);
 		}
 	}
-	componentWillUnmount(){
-		this.props.ClearSearchText();
+	componentWillUnmount() {
+		this.props.ClearSearch();
 	}
-	render(){
+	render() {
 		return (
             <div className='search'>
                 <h1>Search</h1>
@@ -32,12 +31,10 @@ class Search extends React.Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(
-	{
-		LoadSearchMovies,
-		ClearSearchText
-	},
-	dispatch
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+		LoadSearch,
+		ClearSearch
+	}, dispatch
 );
 
 export default withRouter(connect(null, mapDispatchToProps)(Search));

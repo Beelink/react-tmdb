@@ -5,6 +5,7 @@ import Header from './components/Header';
 // import Loading from './components/Loading';
 import Home from './components/Home';
 import Search from './components/Search';
+import Movie from './components/Movie';
 import NotFound from './components/NotFound';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -21,14 +22,17 @@ function App() {
 					<Header />
 					<div className='content'>
 						<Switch>
-							<Route exact path='/:page(\\d+)?'>
+							<Route exact path='/:page?'>
 								<Home />
 							</Route>
-							<Route path='/search/:query/:page?'>
+							<Route exact path='/search/:query/:page?'>
 								<Search />
 							</Route>
+							<Route exact path='/movie/:movie_id/:cast?'>
+								<Movie />
+							</Route>
 							<Route
-								path="*"
+								path='*'
 								status={404}
 								render={(props) => <NotFound {...props} status={404} />}
 							/>

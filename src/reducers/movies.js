@@ -21,20 +21,20 @@ const movies = (state = initialState, action) => {
 				all: action.payload,
 				isFetched: true
 			};
-		case types.movies.loadSearchMoviesRequest:
+		case types.search.loadSearchRequest:
 			return {
 				...state,
 				all: [],
 				searchText: action.searchText,
 				isFetched: false
 			};
-		case types.movies.loadSearchMoviesSuccess:
+		case types.search.loadSearchSuccess:
 			return {
 				...state,
 				all: action.payload,
 				isFetched: true
 			};
-		case types.movies.clearSearchText:
+		case types.search.clearSearch:
 			return {
 				...state,
 				searchText: ''

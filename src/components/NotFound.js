@@ -1,9 +1,14 @@
 import React from 'react';
 
+import InfoMessage from './InfoMessage'
+
 function NotFound(props) {
     return (
-        <div>OOPS, THE PAGE YOU ARE LOOKING FOR CAN'T BE FOUND! STATUS: {props.status}</div>
-    )
+        <div className='not-found'>
+            <h1>Oops...</h1>
+            <InfoMessage message={`The page you are looking for can't be found. Status: ${props.status}`} />
+        </div>
+    );
 }
 
 export default NotFound;

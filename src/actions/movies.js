@@ -33,22 +33,22 @@ const onLoadMovies = {
 	})
 };
 
-export const LoadSearchMovies = (query, page = 1) => {
+export const LoadSearch = (query, page = 1) => {
 	return (dispatch) => {
-		dispatch(onLoadSearchMovies.request(query));
-		return onLoadSearchMovies.fetch(query, page)
+		dispatch(onLoadSearch.request(query));
+		return onLoadSearch.fetch(query, page)
 			.then(({ data }) => {
-				dispatch(onLoadSearchMovies.success(data));
+				dispatch(onLoadSearch.success(data));
 			})
 			.catch((error) => {
-				dispatch(onLoadSearchMovies.error(error))
+				dispatch(onLoadSearch.error(error))
 			});
 	}
 };
 
-const onLoadSearchMovies = {
+const onLoadSearch = {
 	request: (query) => ({
-		type: types.movies.loadSearchMoviesRequest,
+		type: types.search.loadSearchRequest,
 		searchText: query
 	}),
 	fetch: (query, page) => {
@@ -56,26 +56,26 @@ const onLoadSearchMovies = {
 	},
 	success: (payload) => {
 		return {
-			type: types.movies.loadSearchMoviesSuccess,
+			type: types.search.loadSearchSuccess,
 			payload
 		}
 	},
 	error: (payload) => ({
-		type: types.movies.loadSearchMoviesError,
+		type: types.search.loadSearchError,
 		errors: payload
 	})
 };
 
-export const ClearSearchText = () => {
+export const ClearSearch = () => {
 	return (dispatch) => {
-		dispatch(onClearSearchText.request());
+		dispatch(onClearSearch.request());
 	}
 };
 
-const onClearSearchText = {
+const onClearSearch = {
 	request: () => {
 		return ({
-			type: types.movies.clearSearchText
+			type: types.search.clearSearch
 		})
 	}
 };

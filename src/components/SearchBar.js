@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
-import { LoadSearchMovies } from '../actions/movies';
+import { LoadSearch } from '../actions/movies';
 
 class SearchBar extends React.Component {
     searchInputChange = (e) => {
@@ -19,14 +19,14 @@ class SearchBar extends React.Component {
         const { searchText } = this.props;
         return (
             <div className='search-bar'>
-                <input type='text' placeholder='Search movies, actors, theaters...' onInput={this.searchInputChange} value={searchText}/>
+                <input type='text' placeholder='Search movies, actors, theaters...' onInput={this.searchInputChange} value={searchText} />
             </div>
         )
     }
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-		LoadSearchMovies
+		LoadSearch
 	}, dispatch
 );
 

@@ -3,15 +3,22 @@ const types = {
         loadMoviesRequest: 'LOAD_MOVIES_REQUEST',
         loadMoviesSuccess: 'LOAD_MOVIES_SUCCESS',
         loadMoviesError: 'LOAD_MOVIES_ERROR',
-        loadSearchMoviesRequest: 'LOAD_SEARCH_MOVIES_REQUEST',
-        loadSearchMoviesSuccess: 'LOAD_SEARCH_MOVIES_SUCCESS',
-        loadSearchMoviesError: 'LOAD_SEARCH_MOVIES_ERROR',
-        clearSearchText: 'CLEAR_SEARCH_TEXT',
+    },
+    search: {
+        loadSearchRequest: 'LOAD_SEARCH_REQUEST',
+        loadSearchSuccess: 'LOAD_SEARCH_SUCCESS',
+        loadSearchError: 'LOAD_SEARCH_ERROR',
+        clearSearch: 'CLEAR_SEARCH',
     },
     genres: {
         loadGenresRequest: 'LOAD_GENRES_REQUEST',
         loadGenresSuccess: 'LOAD_GENRES_SUCCESS',
         loadGenresError: 'LOAD_GENRES_ERROR',
+    },
+    movie: {
+        loadMovieRequest: 'LOAD_MOVIE_REQUEST',
+        loadMovieSuccess: 'LOAD_MOVIE_SUCCESS',
+        loadMovieError: 'LOAD_MOVIE_ERROR',
     },
 }
 

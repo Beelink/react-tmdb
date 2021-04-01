@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom';
 
 import MovieCard from './MovieCard'
 import Loading from './Loading';
+import InfoMessage from './InfoMessage'
 
-import { LoadMovies, LoadSearchMovies } from '../actions/movies';
+import { LoadMovies, LoadSearch } from '../actions/movies';
 import { LoadGenres } from '../actions/genres';
 
 class MovieList extends React.Component {
@@ -17,13 +18,13 @@ class MovieList extends React.Component {
         LoadMovies(match.params.page, filter);
 	}
 	componentWillReceiveProps(nextProps) {
-		const { match, LoadGenres, LoadMovies, LoadSearchMovies, filter, searchText } = this.props;
+		const { match, LoadGenres, LoadMovies, LoadSearch, filter, searchText } = this.props;
 		if(nextProps.filter !== filter || nextProps.match.params.query !== match.params.query || nextProps.match.params.page !== match.params.page){
 			LoadGenres();
 			if(searchText.length === 0){
 				LoadMovies(nextProps.match.params.page, nextProps.filter);
 			} else {
-				LoadSearchMovies(nextProps.match.params.query, nextProps.match.params.page);
+				LoadSearch(nextProps.match.params.query, nextProps.match.params.page);
 			}
 		}
 	};
@@ -40,40 +41,43 @@ class MovieList extends React.Component {
     render() {
         const { movies, isFetched } = this.props;
 
-        if(!isFetched)
-			return (
-				<div className="movie-list">
-					<Loading />
-				</div>
-			);
+        if(!isFetched) {
+			return <Loading />;
+		}
 
-		return (
-			<div className="movie-list">
-				{movies.results && movies.results.map(movie => (
-					<MovieCard key={movie.id} movie={movie}/>
-				))}
-				<div className="pagination-container">
-					<Pagination
-						activePage={movies.page}
-						itemsCountPerPage={20}
-						totalItemsCount={movies.total_results}
-						pageRangeDisplayed={5}
-						onChange={this.handlePageChange}
-						prevPageText={``}
-						nextPageText={``}
-						firstPageText={``}
-						lastPageText={``}
-					/>
+		if (movies.results.length > 0) {
+			return (
+				<div className='movie-list'>
+					{movies.results && movies.results.map(movie => (
+						<MovieCard key={movie.id} movie={movie}/>
+					))}
+					{movies.total_results > 20 && (
+						<div className='pagination-container'>
+							<Pagination
+								activePage={movies.page}
+								itemsCountPerPage={20}
+								totalItemsCount={movies.total_results}
+								pageRangeDisplayed={5}
+								onChange={this.handlePageChange}
+								prevPageText={`Prev`}
+								nextPageText={`Next`}
+								firstPageText={``}
+								lastPageText={``}
+							/>
+						</div>
+					)}
 				</div>
-			</div>
-		)
+			)
+		} else {
+			return <InfoMessage message='No movies to show...' />;
+		}
     }
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
 		LoadGenres,
 		LoadMovies,
-		LoadSearchMovies
+		LoadSearch
 	}, dispatch
 );
 
