@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import config from '../config';
 
@@ -50,47 +52,49 @@ class Movie extends React.Component {
 		
 		return (
 			<div className='movie'>
-				<h1>{movie.title}</h1>
-				<div className="movie-single">
-					<div className="movie-single-inner">
+				<Helmet>
+					<title>{movie.title} | Movies</title>
+				</Helmet>
+				<div className='movie-single'>
+					<div className='movie-single-inner'>
                         <Rating rating={movie.vote_average} />
-						<div className="movie-poster">
+						<div className='movie-image'>
 							<img src={`${config.API_IMAGE.medium}/${movie.poster_path}`} onLoad={this.imageLoaded} alt={movie.poster_path}/>
 						</div>
-						<div className="movie-details">
-							<div className="movie-title">
+						<div className='movie-details'>
+							<div className='movie-title'>
 								<span>Title</span>
-								{movie.title}
+								<h1>{movie.title}</h1>
 							</div>
 							{movie.overview ? (
-								<div className="movie-description">
+								<div className='movie-description'>
 									<span>Overview</span>
 									{movie.overview}
 								</div>
 							) : ''}
 							{movie.release_date ? (
-								<div className="movie-item">
+								<div className='movie-item'>
 									<span>Release date</span>
 									{movie.release_date}
 								</div>
 							) : ''}
 							{movie.budget ? (
-								<div className="movie-item">
+								<div className='movie-item'>
 									<span>Budget</span>
 									$ {this.moneySpace(movie.budget)}
 								</div>
 							) : ''}
 							{movie.revenue ? (
-								<div className="movie-item">
+								<div className='movie-item'>
 									<span>Revenue</span>
 									$ {this.moneySpace(movie.revenue)}
 								</div>
 							) : ''}
-							<div className="movie-item">
+							<div className='movie-item'>
 								<span>Duration</span>
 								{this.convertMinsToHrsMins(movie.runtime)}
 							</div>
-							<ul className="movie-genres">
+							<ul className='movie-genres'>
 								{movie.genres && movie.genres.map(item => {
 									return (
 										<li key={item.id}>{item.name}</li>
@@ -122,4 +126,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Movie);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Movie));

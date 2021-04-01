@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Helmet } from 'react-helmet';
 
 import { LoadSearch, ClearSearch } from '../actions/movies';
 
@@ -22,9 +23,13 @@ class Search extends React.Component {
 		this.props.ClearSearch();
 	}
 	render() {
+		const { searchText } = this.props;
 		return (
             <div className='search'>
-                <h1>Search</h1>
+				<Helmet>
+					<title>Search: {searchText} | Movies</title>
+				</Helmet>
+                <h1>Search: {searchText}</h1>
                 <MovieList />
             </div>
         )
@@ -37,4 +42,10 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 	}, dispatch
 );
 
-export default withRouter(connect(null, mapDispatchToProps)(Search));
+const mapStateToProps = (state) => {
+	return {
+		searchText: state.movies.searchText
+	};
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
