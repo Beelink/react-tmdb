@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
-// import Loading from './components/Loading';
 import Home from './components/Home';
 import Search from './components/Search';
 import Movie from './components/Movie';
+import Actor from './components/Actor';
 import NotFound from './components/NotFound';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -29,6 +29,9 @@ function App() {
 						</Route>
 						<Route exact path='/movie/:movie_id/:cast?'>
 							<Movie />
+						</Route>
+						<Route exact path='/actor/:actor_id/:page?'>
+							<Actor />
 						</Route>
 						<Route
 							path='*'

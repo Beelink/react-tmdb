@@ -1,7 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
+
+import { SlideDown } from 'react-slidedown'
+import 'react-slidedown/lib/slidedown.css'
 
 import ActorCard from './ActorCard';
 import Loading from './Loading';
@@ -32,7 +35,7 @@ class ActorList extends React.Component {
 			history.push(`/movie/${match.params.movie_id}/cast`);
 	};
 
-	render(){
+	render() {
 		const { actors, isFetched } = this.props;
 
 		let actorsArray = actors;
@@ -45,16 +48,18 @@ class ActorList extends React.Component {
         }
 
 		return (
-			<div className="actor-list">
+			<div className='actor-list'>
 				<h2>Top billed cast</h2>
 				{actors.length > 4 && (
 					<span className={`expand ${this.state.visibleAll ? '-active' : ''}`} onClick={this.showAll}>Show all</span>
 				)}
-				<div className="actors-inline">
-					{actorsArray.map(actor => (
-						<ActorCard key={actor.id} actor={actor} />
-					))}
-				</div>
+				<SlideDown className='my-dropdown-slidedown'>
+					<div className='actors-inline'>
+						{actorsArray.map(actor => (
+							<ActorCard key={actor.id} actor={actor} />
+						))}
+					</div>
+				</SlideDown>
 			</div>
 		)
 	}

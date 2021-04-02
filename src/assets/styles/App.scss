@@ -306,6 +306,16 @@ h1 {
       object-position: center;
       filter: blur(16px);
     }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -32px;
+      width: 100%;
+      bottom: 0;
+      background: $dark-overlay-color;
+    }
   }
 
   .row {
@@ -447,6 +457,10 @@ h1 {
     }
   }
 
+  .my-dropdown-slidedown {
+    overflow: hidden;
+  }
+
   .actors-inline {
     display: flex;
     flex-wrap: wrap;
@@ -529,5 +543,54 @@ h1 {
     width: 20px;
     margin: 0 8px 2px 0;
     vertical-align: middle;
+  }
+}
+
+.actor {
+  display: flex;
+  margin: 72px 0 0 0;
+
+  .actor-image {
+    img {
+      border-radius: $light-radius;
+      vertical-align: top;
+    }
+  }
+
+  .column {
+    &.-left {
+      min-width: 300px;
+    }
+
+    &.-right {
+      padding: 0 0 0 64px;
+    }
+  }
+
+  .actor-bio {
+    margin-top: 32px;
+
+    h2 {
+      font-size: 36px;
+      margin: 64px 0 24px 0;
+    }
+
+    .bio {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  .actor-detail {
+    margin-top: 32px;
+
+    .detail {
+      margin: 8px 0;
+    }
+
+    .value {
+      font-size: 24px;
+      font-weight: bold;
+    }
   }
 }

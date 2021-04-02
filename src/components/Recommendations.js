@@ -25,9 +25,9 @@ class Recommendations extends React.Component {
 			);
 
 		return (
-			<div className="recommendations">
+			<div className='recommendations'>
 				{recommendations.results && recommendations.results.length > 0 && (
-					<div className="recommendations-inner">
+					<div className='recommendations-inner'>
 						<h1>Recommendations</h1>
 						<div className='movie-list'>
                             {recommendations.results && recommendations.results.map(movie => (

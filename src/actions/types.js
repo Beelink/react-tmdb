@@ -30,6 +30,16 @@ const types = {
         loadReccomendationsSuccess: 'LOAD_RECOMMENDATIONS_SUCCESS',
         loadReccomendationsError: 'LOAD_RECOMMENDATIONS_ERROR',
     },
+    actor: {
+        loadActorRequest: 'LOAD_ACTOR_REQUEST',
+        loadActorSuccess: 'LOAD_ACTOR_SUCCESS',
+        loadActorError: 'LOAD_ACTOR_ERROR',
+    },
+    starring: {
+        loadStarringRequest: 'LOAD_STARRING_REQUEST',
+        loadStarringSuccess: 'LOAD_STARRING_SUCCESS',
+        loadStarringError: 'LOAD_STARRING_ERROR',
+    }
 }
 
 export default types;
