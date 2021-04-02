@@ -550,10 +550,15 @@ h1 {
   display: flex;
   margin: 72px 0 0 0;
 
+  h1 {
+    font-size: 36px;
+  }
+
   .actor-image {
     img {
       border-radius: $light-radius;
       vertical-align: top;
+      width: 100%;
     }
   }
 
@@ -591,6 +596,147 @@ h1 {
     .value {
       font-size: 24px;
       font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .actor {
+    .column.-left {
+      min-width: 185px;
+    }
+  }
+
+  .movie-single {
+    .movie-banner {
+      display: none;
+    }
+
+    .movie-image {
+      box-shadow: none;
+    }
+
+    .row {
+      margin: 72px 0 0 0;
+    }
+
+    .column.-left {
+      min-width: 185px;
+    }
+
+    .hero {
+      height: auto;
+    }
+
+    .movie-details {
+      display: block;
+    }
+
+    .movie-details li {
+      color: $text-color;
+      margin-top: 16px;
+    }
+
+    .movie-rating,
+    h1 {
+      color: $text-color;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .actor {
+    flex-direction: column;
+
+    .column.-left {
+      text-align: center;
+    }
+
+    .column.-right {
+      padding: 0;
+    }
+
+    .actor-image img {
+      width: 185px;
+    }
+  }
+
+  .movie-single {
+    .row {
+      flex-direction: column;
+    }
+
+    .column.-right {
+      padding: 0;
+    }
+
+    .column.-left {
+      text-align: center;
+    }
+
+    .movie-image img {
+      width: 185px;
+    }
+  }
+
+  .search-bar {
+    text-align: center;
+    display: block;
+
+    input {
+      display: inline-block;
+      text-align: center;
+      margin: 0;
+      box-sizing: border-box;
+      height: 48px;
+    }
+  }
+
+  header .content {
+    display: block;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .movie-single {
+    h1 {
+      font-size: 36px;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+  }
+
+  .recommendations-inner h1 {
+    font-size: 24px;
+  }
+
+  .movie-list {
+    flex-basis: 25%;
+
+    .movie-card {
+      flex-basis: 25%;
+    }
+
+    .movie-image img {
+      min-height: 0;
+    }
+  }
+
+  .actor-list {
+    .actor-card {
+      min-width: 50%;
+      max-width: 50%;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    .expand {
+      top: 5px;
     }
   }
 }
